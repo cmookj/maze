@@ -36,6 +36,7 @@ struct pos_t {
   }
 };
 
+// This function is necessary to use the ostream_iterator<> for standard output.
 ostream&
 operator<< (ostream& os, const pos_t& p) {
   return os << p.i << ", " << p.j;
@@ -121,6 +122,7 @@ insert_children (
   candidates.push_back (pos_t (current.i, current.j + 1));  // right
   candidates.push_back (pos_t (current.i + 1, current.j));  // down
 
+  // Add the 4 adjacent cells if they are free and have not visited yet.
   for (const auto& p : candidates) {
     if (should_visit (p, mz, visited_map)) {
       search_queue.push_back (p);
@@ -140,6 +142,9 @@ path_to (const pos_t& start, const pos_t& goal, const maze_t& mz) {
 
   // Breadth-first search
   while (!arrived (search_queue, goal)) {
+    // Since we have not arrived at the goal, we are going to add all the
+    // adjacent cells (children) which have not visited.  After adding the
+    // children, we remove the current cells from the search queue.
     int count_current_children = search_queue.size();
     for (int i = 0; i < count_current_children; ++i) {
       auto& current                     = search_queue[i];
