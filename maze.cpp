@@ -41,10 +41,15 @@ operator<< (ostream& os, const pos_t& p) {
   return os << p.i << ", " << p.j;
 }
 
+// -----------------------------------------------------------------------------
+// backtrack_t
+// -----------------------------------------------------------------------------
 using backtrack_t = vector<vector<pos_t>>;
 
-backtrack_t backtrack;
-
+// Each cell contains the coordinate of the previous cell, which is the parent
+// node if the breadth-first search is considered as a tree.  When the search
+// algorithm arrives at the goal cell, we can reconstruct the route from the
+// initial position by backtracking.
 backtrack_t
 create_backtrack (const maze_t& mz) {
   backtrack_t backtrack;
@@ -64,9 +69,9 @@ record_backtrack (backtrack_t& backtrack, const pos_t& p, const pos_t& prev) {
   backtrack[p.i][p.j] = prev;
 }
 
-//
+// -----------------------------------------------------------------------------
 // visited_map_t
-//
+// -----------------------------------------------------------------------------
 using visited_map_t = vector<vector<bool>>;
 
 // When a cell was visited, set it true.
@@ -133,7 +138,7 @@ path_to (const pos_t& start, const pos_t& goal, const maze_t& mz) {
 
   search_queue.push_back (start);
 
-  // Breath-first search
+  // Breadth-first search
   while (!arrived (search_queue, goal)) {
     int count_current_children = search_queue.size();
     for (int i = 0; i < count_current_children; ++i) {
