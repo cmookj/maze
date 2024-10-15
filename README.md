@@ -28,3 +28,5 @@ maze_t maze = {
 The coordinates are all 0 based and corresponds to the convention of matrix
 index.  That is (0, 0) is the upper left corner cell, and (2, 3) is the cell 
 in the 3rd row and 4th column.
+
+The program solves the route from (1, 1) to (5, 5) as an example.
