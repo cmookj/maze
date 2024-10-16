@@ -25,6 +25,9 @@ maze_t maze = {
 };
 ```
 
+The data above represent the following maze:
+![](maze.jpg)
+
 The coordinates are all 0 based and corresponds to the convention of matrix
 index.  That is (0, 0) is the upper left corner cell, and (2, 3) is the cell 
 in the 3rd row and 4th column.
